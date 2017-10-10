@@ -13,14 +13,16 @@
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$pdo->exec('SET NAMES "utf8"') ;
 			}
+			
 			catch (PDOException $e) {
 				self::db_error("Couldn't make connection to database: ", $e);
 			}
+			
 			$this->pdo = $pdo;
 		}
 
 		function destroy_connection(){
-			unset($this->pdo);
+			$this->pdo = null;
 		}
 
 		function getGenerallyCountryInfo($country){
@@ -33,9 +35,11 @@
 				$res->bindParam(':country', $country, PDO::PARAM_STR);
 				$res->execute();
 			}
+			
 			catch (PDOException $e) {
 				self::db_error('Select data error: ', $e);
 			}
+			
 			return $res;
 		}
 
@@ -49,10 +53,17 @@
 				$res->bindParam(':country', $country, PDO::PARAM_STR);
 				$res->execute();
 			}
+			
 			catch (PDOException $e) {
 				self::db_error('Select data error: ', $e);
 			}
-			return $res;			
+
+			if (count($res) > 1){
+				return $res->fetchAll();  //should to look after that moment
+			}
+			else {
+				return $res->fetch();
+			}			
 		}
 
 		function simpleSelect($sql){
@@ -60,19 +71,22 @@
 				$res = $this->pdo->prepare($sql);
 				$res->execute();
 			}
+			
 			catch (PDOException $e) {
 				self::db_error('Select data error: ', $e);
 			}
+			
 			return $res;
 		}
 
-		function getTenWithBiggerGNP(){
+		function getTenWithBiggestGNP(){
 			$sql = 'SELECT country.Name, country.GNP 
 						FROM country 
     					INNER JOIN countrylanguage ON country.Code = countrylanguage.CountryCode 
     					ORDER BY country.GNP 
     					DESC LIMIT 10;';
-    		return $this->simpleSelect($sql);	
+    		
+    		return $this->simpleSelect($sql)->fetchAll();	
 		}
 
 		function getTenMostPopularLanguages(){
@@ -81,8 +95,9 @@
     					INNER JOIN countrylanguage ON country.Code = countrylanguage.CountryCode
     					GROUP BY Lang
     					ORDER BY Quantity DESC
-    					LIMIT 10;'
-    		return $this->simpleSelect($sql);
+    					LIMIT 10;';
+    		
+    		return $this->simpleSelect($sql)->fetchAll();
 		}
 
 		static function db_error($string, $exception){
