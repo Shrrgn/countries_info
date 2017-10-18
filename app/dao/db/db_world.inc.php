@@ -1,9 +1,9 @@
 <?php 
 
-	require_once 'connection.php';
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+	require_once 'db.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/app/config/config.php';
 
-	class ConnectionDBWorld implements Connection {
+	class ConnectionDBWorld implements ConnectionDB {
 
 		use WorldDBSettings;
 
@@ -18,13 +18,14 @@
 				self::db_error("Couldn't make connection to database: ", $e);
 			}
 			
-			$this->pdo = $pdo;
+			return $pdo;
 		}
-
-		function destroy_connection(){
-			$this->pdo = null;
+		
+		function destroy_connection($pdo){
+			$pdo = null;
 		}
-
+		
+		/*
 		function getGenerallyCountryInfo($country){
 			try {
 				$sql = 'SELECT country.Name, city.Name, country.SurfaceArea, country.IndepYear, country.Population,country.GovernmentForm
@@ -99,7 +100,7 @@
     		
     		return $this->simpleSelect($sql)->fetchAll();
 		}
-
+		*/
 		static function db_error($string, $exception){
 			$output = $string . $exception->getMessage();
 			include 'output.html.php';

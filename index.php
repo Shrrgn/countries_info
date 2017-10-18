@@ -1,8 +1,8 @@
 <?php
-	include $_SERVER['DOCUMENT_ROOT'] . '/model/db/db_world.inc.php';
+	include $_SERVER['DOCUMENT_ROOT'] . '/app/dao/countryDAOImpl.php';
 
-	new ConnectionDBWorld();
-	
+	$c = new CountryDAOImpl("Ukraine");
+	echo $c->countryInfo();
 
 	echo 'Everything ok)';
 ?>
