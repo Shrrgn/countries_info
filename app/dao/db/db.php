@@ -1,6 +1,7 @@
 <?php
 	interface ConnectionDB {
 		public function __construct();
-		public function destroy_connection($pdo); 
+		public function getPDO();
+		public function destroy_connection(); 
 	}
 ?>

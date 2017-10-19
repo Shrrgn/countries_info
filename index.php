@@ -1,8 +1,8 @@
 <?php
-	include $_SERVER['DOCUMENT_ROOT'] . '/app/dao/countryDAOImpl.php';
+	include $_SERVER['DOCUMENT_ROOT'] . '/app/controllers/country_controller.php';
 
-	$c = new CountryDAOImpl("Ukraine");
-	echo $c->countryInfo();
+	$c = new CountryController("Ukraine");
+	$c->action_index();
 
 	echo 'Everything ok)';
 ?>

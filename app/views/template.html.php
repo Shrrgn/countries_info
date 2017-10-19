@@ -8,7 +8,7 @@
 	<body>
 		<h2>Co-country</h2>
 
-		<?php include $_SERVER['DOCUMENT_ROOT'] . '/views/' . $content_view; ?>
+		<?php include $_SERVER['DOCUMENT_ROOT'] . '/app/views/' . $content_view; ?>
 	</body>
 
 </html>
