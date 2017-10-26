@@ -1,7 +1,7 @@
 <?php
 	interface UserDAO {
-		function getUserByName();
-		function editUserInfo($password = null, $mail = null);
+		function getUser($nick, $password);
+		function editUserInfo($nick, $password = null, $mail = null);
 		function addUser($nickname, $password, $mail);
 	}
 ?>

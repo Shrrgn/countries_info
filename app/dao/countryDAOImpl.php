@@ -12,7 +12,7 @@
 
 		function getData(){
 			$info = $this->countryInfo();
-			$c = new Country($info[0],$info[1],$info[2],$info[3],$info[4],$info[5]);
+			$c = new Country($info[0], $info[1], $info[2], $info[3], $info[4], $info[5]);
 			$c->setOffCountryLangs($this->officialLangs());
 			return $c;
 		}
@@ -93,16 +93,6 @@
 			return self::checkCountries($res, $this->country);
 		}
 
-		static function checkCountries($arr, $country){
-			while ($i = $arr->fetchAll()){
-				if ($i[0] == $country){
-					return true;
-				}
-			}
-
-			return false;			
-		}
-
 		function isInTenLangs(){
 			$pdo = new ConnectionDBWorld();
 
@@ -126,6 +116,16 @@
 			}
 
 			return self::checkCountries($res, $this->country);	
+		}
+
+		static function checkCountries($arr, $country){
+			while ($i = $arr->fetchAll()){
+				if ($i[0] == $country){
+					return true;
+				}
+			}
+
+			return false;			
 		}
 	}
 ?>
