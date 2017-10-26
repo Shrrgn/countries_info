@@ -1,10 +1,9 @@
 <?php
-	
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/app/view.php';
 
-	class MainController {
+	class RegistrationController {
 		function action_index(){
-			View::generate('main.html.php');
+			View::generate('registration.html.php');
 		}
 	}
 ?>

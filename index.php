@@ -1,12 +1,8 @@
 <?php
-	/*
-	include $_SERVER['DOCUMENT_ROOT'] . '/app/controllers/country_controller.php';
-
-	$c = new CountryController("Ukraine");
-	$c->action_index();
-	*/
 
 	require_once '/app/route.php';
+	ini_set('display_errors', 1);
+
 	Route::start();
 
 	echo 'Everything ok)';

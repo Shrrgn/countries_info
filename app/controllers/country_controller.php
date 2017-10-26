@@ -15,7 +15,7 @@
 			$generally = array($c_info->getCountryName(), $c_info->getCapital(), $c_info->getSurfArea(), $c_info->getIndepYear(),
 								$c_info->getPopulation(), $c_info->getGovForm());
 
-			View::generate('country_info.html.php', compact("generally"));	
+			View::generate('country.html.php', compact("generally"));	
 		}
 	}
 ?>
